@@ -39,13 +39,13 @@ var isAnagramOfPalindrome = function( S ) {
     var i;
 
     // convert the first character [a-z] to binary value
-    var a = 'a'.charCodeAt(0).toString(2);
+    var a = 'a'.charCodeAt(0);
 
     // for each character in the string
     for(i = 0 ; i < S.length ; i++) {
         // shift 1 to the left << the distance of the difference between the current character and a
         // flip the bit for the current character ^= (either add the bit or remove the bit)
-        val ^=  1 << (S.charCodeAt(i).toString(2) - a);
+        val ^=  1 << (S.charCodeAt(i) - a);
 
         // show the current val in binary
         console.log(val.toString(2));

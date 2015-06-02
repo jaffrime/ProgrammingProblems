@@ -1,3 +1,5 @@
+// return a string with spaces inserted in between each character
+
 String.prototype.spacify = function() {
     var result = '';
     var len = this.length;

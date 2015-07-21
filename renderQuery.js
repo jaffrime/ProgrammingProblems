@@ -11,28 +11,41 @@ E.g.
 <div id="query">What years did <u>Barack Obama</u> attend <u>Harvard</u></div>
 */
 
-var wrapQueryWithElement = function(str, queryResults, el) {
+var wrapQueryWithElement = function(query, el) {
   var elStart = '<'+el+'>';
   var elEnd = '</'+el+'>';
-  var intModifier = elStart.length + elEnd.length;
-  var indexModifier = function(x) { return intModifier * x; };
-  var strResult = str;
+  var modifier = elStart.length + elEnd.length;
+  var indexModifier = function(x) { return modifier * x; };
+  var newStr = query.value;
+  var indices = query.indices;
 
-  for(var i=0; i < queryResults.length; i++) {
-	var intCurrentIndexModifier = indexModifier(i);
-	var intStartIndex           = queryResults[i][0] + intCurrentIndexModifier;
-	var intEndIndex             = queryResults[i][1] + intCurrentIndexModifier;
-	var strBefore               = strResult.slice(0, intStartIndex);
-	var strReplace              = elStart + strResult.substring(intStartIndex, intEndIndex) + elEnd;
-	var strAfter                = strResult.slice(intEndIndex);
-	strResult                   = strBefore + strReplace + strAfter;
+  for(var i=0; i < indices.length; i++) {
+    var currentIndexModifier = indexModifier(i);
+    var startIndex = indices[i][0] + currentIndexModifier;
+    var endIndex = indices[i][1] + currentIndexModifier;
+    var strBefore = newStr.slice(0, startIndex);
+    var strReplace = elStart + newStr.substring(startIndex, endIndex) + elEnd;
+    var strAfter = newStr.slice(endIndex);
+    newStr = strBefore+strReplace+strAfter;
   }
-  return strResult;
+  query.value = newStr;
+  return query;
 };
+
+var renderQuery = function(el, query) {
+  el.innerHTML=query.value;
+}
 
 var strQuery = document.getElementById('before_query').innerHTML;
 var namedEntitiesIndices = [[15, 27], [35, 42]];
-var result = wrapQueryWithElement(strQuery, namedEntitiesIndices, 'u');
-console.log(result);
+var namedEntitiesQuery = {
+  value: strQuery,
+  indices: namedEntitiesIndices
+};
 
-// document.getElementById('query').innerHTML=result;
+var resultQuery = wrapQueryWithElement(namedEntitiesQuery, 'u');
+console.log(resultQuery);
+
+renderQuery(document.getElementById('query'), resultQuery);
+
+

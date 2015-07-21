@@ -36,7 +36,7 @@ var renderQuery = function(el, query) {
   el.innerHTML=query.value;
 }
 
-var strQuery = document.getElementById('before_query').innerHTML;
+var strQuery = 'What years did Barack Obama attend Harvard?'
 var namedEntitiesIndices = [[15, 27], [35, 42]];
 var namedEntitiesQuery = {
   value: strQuery,

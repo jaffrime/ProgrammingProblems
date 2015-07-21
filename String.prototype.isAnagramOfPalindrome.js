@@ -19,9 +19,6 @@ A string is an anagram of a palindrome if and only if at most one character appe
 
 The specification stated that the input can only contain the 26 lowercase letters a – z, which have consecutive codepoints in Unicode.
 
-In Javascript, numbers are always stored as 64-bit floating point values  (double precision floating point).  JavaScript will perform an internal conversion to a 32-bit value but you can't gain access directly to this integer and it is converted back to floating point format as soon as it is possible. So we can store one bit for each of the allowed letters.
-
-The expression b & (b - 1) evaluates to zero if and only if b has at most one bit set.
  */
 
 String.prototype.isAnagramOfPalindrome = function(str) {
